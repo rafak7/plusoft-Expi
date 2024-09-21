@@ -2,8 +2,11 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export function LandingPageComponent() {
+  const [selectedGif, setSelectedGif] = useState<string | null>(null)
+
   const sections = [
     { 
       title: 'Inserindo Nome', 
@@ -41,7 +44,8 @@ export function LandingPageComponent() {
               <motion.div 
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
-                className="w-full flex justify-center"
+                className="w-full flex justify-center cursor-pointer"
+                onClick={() => setSelectedGif(section.gif)}
               >
                 <Image
                   src={section.gif}
@@ -69,6 +73,23 @@ export function LandingPageComponent() {
           <p>&copy; 2023 Landing Page Interativa. Todos os direitos reservados.</p>
         </div>
       </footer>
+
+      {selectedGif && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setSelectedGif(null)}
+        >
+          <div className="max-w-4xl max-h-[90vh] overflow-auto bg-black bg-opacity-50 p-1 rounded-lg">
+            <Image
+              src={selectedGif}
+              alt="GIF em tamanho grande"
+              width={1000}
+              height={750}
+              className="w-full h-auto rounded-md"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
