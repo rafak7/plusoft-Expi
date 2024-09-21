@@ -40,24 +40,11 @@ export function LandingPageComponent() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      <header className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-        <div className="container mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center justify-between">
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-              Descubra o Poder do <span className="text-yellow-300">Expi Analyzer</span>
-            </h1>
-            <p className="text-xl text-purple-100">
-              Transforme sua experiência de atendimento com análise avançada e insights acionáveis.
-            </p>
-          </div>
-          <div className="md:w-1/2 flex justify-center">
-            <Image
-              src="/header-image.png"
-              alt="Expi Analyzer Dashboard"
-              width={500}
-              height={375}
-              className="rounded-lg shadow-2xl"
-            />
+      <header className="bg-gradient-to-r from-purple-400 to-purple-600 text-white">
+        <div className="container mx-auto px-6 py-16">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Bem-vindo à página de demonstração do Expi Analyzer</h1>
+          <p className="text-xl mb-8">Explore nossas imagens incríveis e descubra mais sobre nossos serviços.</p>
+          <div className="flex space-x-4">
           </div>
         </div>
       </header>
