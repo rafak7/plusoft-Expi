@@ -8,10 +8,10 @@ export function LandingPageComponent() {
     { 
       title: 'Inserindo Nome', 
       description: 'Nesta etapa inicial, você insere seu nome para personalizar sua experiência e receber feedback individualizado ao longo da análise.', 
-      gif: '/gif2.gif' 
+      gif: '/gif1.gif' 
     },
-    { title: 'Seção 2', description: 'Descrição da seção 2', gif: '/gif2.gif' },
-    { title: 'Seção 3', description: 'Descrição da seção 3', gif: '/gif3.gif' },
+    { title: 'Seção 2', description: 'Descrição da seção 2', gif: '/gif1.gif' },
+    { title: 'Seção 3', description: 'Descrição da seção 3', gif: '/gif1.gif' },
   ]
 
   return (
