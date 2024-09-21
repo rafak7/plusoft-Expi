@@ -2,11 +2,23 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 
 export function LandingPageComponent() {
   const [selectedGif, setSelectedGif] = useState<string | null>(null)
   const [activeSection, setActiveSection] = useState('chat')
+  const [isMobile, setIsMobile] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const sections = [
     { 
@@ -51,22 +63,55 @@ export function LandingPageComponent() {
 
       <nav className="bg-purple-100 shadow-md">
         <div className="container mx-auto px-6">
-          <ul className="flex justify-center space-x-8">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <button
-                  onClick={() => setActiveSection(item.id)}
-                  className={`py-4 px-2 text-lg font-semibold ${
-                    activeSection === item.id
-                      ? 'text-purple-600 border-b-2 border-purple-600'
-                      : 'text-gray-500 hover:text-purple-500'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
-          </ul>
+          {isMobile ? (
+            <div className="relative">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="w-full py-4 px-2 text-lg font-semibold text-purple-600 flex justify-between items-center"
+              >
+                {navItems.find(item => item.id === activeSection)?.label || 'Menu'}
+                <ChevronDownIcon className={`w-5 h-5 transition-transform ${isMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isMenuOpen && (
+                <ul className="absolute top-full left-0 right-0 bg-white shadow-md z-10">
+                  {navItems.map((item) => (
+                    <li key={item.id}>
+                      <button
+                        onClick={() => {
+                          setActiveSection(item.id)
+                          setIsMenuOpen(false)
+                        }}
+                        className={`w-full py-3 px-4 text-left ${
+                          activeSection === item.id
+                            ? 'bg-purple-100 text-purple-600'
+                            : 'text-gray-500 hover:bg-purple-50'
+                        }`}
+                      >
+                        {item.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ) : (
+            <ul className="flex justify-center space-x-8">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => setActiveSection(item.id)}
+                    className={`py-4 px-2 text-lg font-semibold ${
+                      activeSection === item.id
+                        ? 'text-purple-600 border-b-2 border-purple-600'
+                        : 'text-gray-500 hover:text-purple-500'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </nav>
 
