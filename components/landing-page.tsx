@@ -10,7 +10,7 @@ export function LandingPageComponent() {
 
   const sections = [
     { 
-      title: 'Inserindo Nome', 
+      title: 'Inserindo Nome de Usuário', 
       description: 'Nesta etapa inicial, você insere seu nome para personalizar sua experiência e receber feedback individualizado ao longo da análise.', 
       gif: '/gif1.gif' 
     },
@@ -23,6 +23,11 @@ export function LandingPageComponent() {
       title: 'Envio de Feedback', 
       description: 'Na etapa final, você tem a oportunidade de enviar seu feedback sobre o atendimento, ajudando-nos a melhorar continuamente nossos serviços.', 
       gif: '/gif4.gif' 
+    },
+    { 
+      title: 'Armazenamento de Chamados', 
+      description: 'Nesta etapa, todos os chamados e feedbacks são armazenados em um dashboard centralizado, permitindo fácil acesso e análise para melhorias contínuas no atendimento.', 
+      gif: '/gif5.gif' 
     },
   ]
 
@@ -68,8 +73,7 @@ export function LandingPageComponent() {
       <main className="flex-grow container mx-auto px-4 sm:px-6 py-8 sm:py-16">
         {activeSection === 'chat' && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center">Expi Chat</h2>
-            <p className="text-lg text-center mb-8">Experimente nossa análise de chat interativa.</p>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-purple-600 text-center">Expi Chat</h2>
             {sections.map((section, index) => (
               <motion.section 
                 key={index}
