@@ -35,17 +35,30 @@ export function LandingPageComponent() {
     { id: 'chat', label: 'Expi Chat' },
     { id: 'voice', label: 'Expi Voice' },
     { id: 'express', label: 'Expi Express' },
+    { id: 'dashboard', label: 'Expi Dashboard' }
   ]
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      <header className="bg-gradient-to-r from-purple-400 to-purple-600 text-white">
-        <div className="container mx-auto px-6 py-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Bem-vindo à página de demonstração do Expi Analyzer</h1>
-          <p className="text-xl mb-8">Explore nossas imagens incríveis e descubra mais sobre nossos serviços.</p>
-          <button className="bg-white text-purple-500 px-6 py-3 rounded-full font-semibold hover:bg-purple-100 transition duration-300">
-            Saiba Mais
-          </button>
+      <header className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+        <div className="container mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center justify-between">
+          <div className="md:w-1/2 mb-8 md:mb-0">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+              Descubra o Poder do <span className="text-yellow-300">Expi Analyzer</span>
+            </h1>
+            <p className="text-xl text-purple-100">
+              Transforme sua experiência de atendimento com análise avançada e insights acionáveis.
+            </p>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            <Image
+              src="/header-image.png"
+              alt="Expi Analyzer Dashboard"
+              width={500}
+              height={375}
+              className="rounded-lg shadow-2xl"
+            />
+          </div>
         </div>
       </header>
 
@@ -152,12 +165,6 @@ export function LandingPageComponent() {
           </div>
         )}
       </main>
-
-      <footer className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p>&copy; 2023 Landing Page Interativa. Todos os direitos reservados.</p>
-        </div>
-      </footer>
 
       {selectedGif && (
         <div 
