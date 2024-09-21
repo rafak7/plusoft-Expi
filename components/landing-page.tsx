@@ -14,8 +14,16 @@ export function LandingPageComponent() {
       description: 'Nesta etapa inicial, você insere seu nome para personalizar sua experiência e receber feedback individualizado ao longo da análise.', 
       gif: '/gif1.gif' 
     },
-    { title: 'Seção 2', description: 'Descrição da seção 2', gif: '/gif2.gif' },
-    { title: 'Seção 3', description: 'Descrição da seção 3', gif: '/gif1.gif' },
+    { 
+      title: 'Criando Chamado', 
+      description: 'Nesta etapa, você cria um novo chamado, fornecendo detalhes sobre o problema ou solicitação que precisa de atenção.', 
+      gif: '/gif2.gif' 
+    },
+    { 
+      title: 'Envio de Feedback', 
+      description: 'Na etapa final, você tem a oportunidade de enviar seu feedback sobre o atendimento, ajudando-nos a melhorar continuamente nossos serviços.', 
+      gif: '/gif4.gif' 
+    },
   ]
 
   const navItems = [
