@@ -4,12 +4,14 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 
 export function LandingPageComponent() {
   const [selectedGif, setSelectedGif] = useState<string | null>(null)
   const [activeSection, setActiveSection] = useState('chat')
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -17,8 +19,21 @@ export function LandingPageComponent() {
     }
     handleResize()
     window.addEventListener('resize', handleResize)
+
+    // Check for user's dark mode preference
+    const isDarkMode = localStorage.getItem('darkMode') === 'true'
+    setDarkMode(isDarkMode)
+    document.documentElement.classList.toggle('dark', isDarkMode)
+
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode
+    setDarkMode(newDarkMode)
+    localStorage.setItem('darkMode', newDarkMode.toString())
+    document.documentElement.classList.toggle('dark', newDarkMode)
+  }
 
   const sections = [
     { 
@@ -51,74 +66,88 @@ export function LandingPageComponent() {
   ]
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      <header className="bg-gradient-to-r from-purple-400 to-purple-600 text-white">
-        <div className="container mx-auto px-6 py-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Bem-vindo à página de demonstração do Expi Analyzer</h1>
-          <p className="text-xl mb-8">Explore nossas imagens incríveis e descubra mais sobre nossos serviços.</p>
-          <div className="flex space-x-4">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      <header className="bg-transparent absolute w-full z-10">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleDarkMode}
+              className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300"
+            >
+              {darkMode ? (
+                <SunIcon className="w-6 h-6" />
+              ) : (
+                <MoonIcon className="w-6 h-6" />
+              )}
+            </button>
+            <div className="flex items-center">
+              <Image
+                src="/logo.png"
+                alt="Expi Analyzer Logo"
+                width={40}
+                height={40}
+                className="mr-2"
+              />
+              <span className="text-xl font-semibold text-purple-600">Expi Analyzer</span>
+            </div>
+            <nav className="hidden md:block">
+              <ul className="flex space-x-6">
+                {navItems.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => setActiveSection(item.id)}
+                      className={`text-sm font-medium ${
+                        activeSection === item.id
+                          ? 'text-purple-600'
+                          : 'text-gray-700 hover:text-purple-500'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            {isMobile && (
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-purple-600 dark:text-purple-400"
+              >
+                <ChevronDownIcon className={`w-6 h-6 transition-transform ${isMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+            )}
           </div>
         </div>
       </header>
 
-      <nav className="bg-purple-100 shadow-md">
-        <div className="container mx-auto px-6">
-          {isMobile ? (
-            <div className="relative">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="w-full py-4 px-2 text-lg font-semibold text-purple-600 flex justify-between items-center"
-              >
-                {navItems.find(item => item.id === activeSection)?.label || 'Menu'}
-                <ChevronDownIcon className={`w-5 h-5 transition-transform ${isMenuOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isMenuOpen && (
-                <ul className="absolute top-full left-0 right-0 bg-white shadow-md z-10">
-                  {navItems.map((item) => (
-                    <li key={item.id}>
-                      <button
-                        onClick={() => {
-                          setActiveSection(item.id)
-                          setIsMenuOpen(false)
-                        }}
-                        className={`w-full py-3 px-4 text-left ${
-                          activeSection === item.id
-                            ? 'bg-purple-100 text-purple-600'
-                            : 'text-gray-500 hover:bg-purple-50'
-                        }`}
-                      >
-                        {item.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ) : (
-            <ul className="flex justify-center space-x-8">
-              {navItems.map((item) => (
-                <li key={item.id}>
-                  <button
-                    onClick={() => setActiveSection(item.id)}
-                    className={`py-4 px-2 text-lg font-semibold ${
-                      activeSection === item.id
-                        ? 'text-purple-600 border-b-2 border-purple-600'
-                        : 'text-gray-500 hover:text-purple-500'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+      {isMobile && isMenuOpen && (
+        <div className="bg-white shadow-md">
+          <ul className="container mx-auto px-6 py-2">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={() => {
+                    setActiveSection(item.id)
+                    setIsMenuOpen(false)
+                  }}
+                  className={`w-full py-2 text-left ${
+                    activeSection === item.id
+                      ? 'text-purple-600'
+                      : 'text-gray-500 hover:text-purple-500'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-      </nav>
+      )}
 
-      <main className="flex-grow container mx-auto px-4 sm:px-6 py-8 sm:py-16">
+      <main className="flex-grow container mx-auto px-4 sm:px-6 py-8 sm:py-16 pt-32">
         {activeSection === 'chat' && (
           <div>
-            <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-purple-600 text-center">Expi Chat</h2>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Chat</h2>
             {sections.map((section, index) => (
               <motion.section 
                 key={index}
@@ -159,7 +188,7 @@ export function LandingPageComponent() {
         )}
         {activeSection === 'voice' && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center">Expi Voice</h2>
+            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Voice</h2>
             <p className="text-lg text-center mb-8">Descubra o poder da análise de voz com Expi Voice.</p>
             <div className="bg-purple-100 p-8 rounded-lg shadow-md">
               <h3 className="text-2xl font-semibold mb-4">Recursos do Expi Voice</h3>
@@ -174,7 +203,7 @@ export function LandingPageComponent() {
         )}
         {activeSection === 'express' && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center">Expi Express</h2>
+            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Express</h2>
             <p className="text-lg text-center mb-8">Análise rápida e eficiente com Expi Express.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-purple-100 p-6 rounded-lg shadow-md">
