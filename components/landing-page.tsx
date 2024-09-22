@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 
 export function LandingPageComponent() {
@@ -11,29 +11,6 @@ export function LandingPageComponent() {
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    handleResize()
-    window.addEventListener('resize', handleResize)
-
-    // Check for user's dark mode preference
-    const isDarkMode = localStorage.getItem('darkMode') === 'true'
-    setDarkMode(isDarkMode)
-    document.documentElement.classList.toggle('dark', isDarkMode)
-
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode
-    setDarkMode(newDarkMode)
-    localStorage.setItem('darkMode', newDarkMode.toString())
-    document.documentElement.classList.toggle('dark', newDarkMode)
-  }
-
   const sections = [
     { 
       title: 'Inserindo Nome de Usuário', 
@@ -56,6 +33,59 @@ export function LandingPageComponent() {
       gif: '/gif5.gif' 
     },
   ]
+
+  const gifRefs = useRef<(HTMLImageElement | null)[]>([])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    // Check for user's dark mode preference
+    const isDarkMode = localStorage.getItem('darkMode') === 'true'
+    setDarkMode(isDarkMode)
+    document.documentElement.classList.toggle('dark', isDarkMode)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (sections.length > 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target as HTMLImageElement
+              img.src = img.dataset.src || ''
+            } else {
+              const img = entry.target as HTMLImageElement
+              img.src = ''
+            }
+          })
+        },
+        { threshold: 0.5 }
+      )
+
+      gifRefs.current.forEach((gif) => {
+        if (gif) observer.observe(gif)
+      })
+
+      return () => {
+        gifRefs.current.forEach((gif) => {
+          if (gif) observer.unobserve(gif)
+        })
+      }
+    }
+  }, [sections])
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode
+    setDarkMode(newDarkMode)
+    localStorage.setItem('darkMode', newDarkMode.toString())
+    document.documentElement.classList.toggle('dark', newDarkMode)
+  }
 
   const navItems = [
     { id: 'chat', label: 'Expi Chat' },
@@ -167,11 +197,14 @@ export function LandingPageComponent() {
                     onClick={() => setSelectedGif(section.gif)}
                   >
                     <Image
+                      ref={(el: HTMLImageElement | null) => {
+                        if (el) gifRefs.current[index] = el;
+                      }}
+                      data-src={section.gif}
                       src={section.gif}
                       alt={section.title}
-                      width={1000}
-                      height={750}
-                      className="w-full sm:max-w-4xl h-auto rounded-lg shadow-lg"
+                      width={500}
+                      height={300}
                     />
                   </motion.div>
                   <motion.div 
@@ -234,11 +267,9 @@ export function LandingPageComponent() {
           onClick={() => setSelectedGif(null)}
         >
           <div className="max-w-4xl max-h-[90vh] overflow-auto bg-black bg-opacity-50 p-1 rounded-lg">
-            <Image
+            <img
               src={selectedGif}
               alt="GIF em tamanho grande"
-              width={1000}
-              height={750}
               className="w-full h-auto rounded-md"
             />
           </div>
