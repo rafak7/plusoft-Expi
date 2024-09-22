@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 
@@ -11,6 +11,8 @@ export function LandingPageComponent() {
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
+  const [showBackToTop, setShowBackToTop] = useState(false)
+  const [isButtonBouncing, setIsButtonBouncing] = useState(true)
   const sections = [
     { 
       title: 'Inserindo Nome de Usuário', 
@@ -80,6 +82,23 @@ export function LandingPageComponent() {
     }
   }, [sections])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const scrollHeight = document.documentElement.scrollHeight
+      const clientHeight = document.documentElement.clientHeight
+
+      if (scrollTop + clientHeight >= scrollHeight - 100) {
+        setShowBackToTop(true)
+      } else {
+        setShowBackToTop(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode
     setDarkMode(newDarkMode)
@@ -93,6 +112,42 @@ export function LandingPageComponent() {
     { id: 'express', label: 'Expi Express' },
     { id: 'dashboard', label: 'Expi Dashboard' }
   ]
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+    setIsButtonBouncing(false)
+  }
+
+  const buttonVariants = {
+    initial: { opacity: 0, y: 50 },
+    animate: isButtonBouncing 
+      ? {
+          opacity: 1,
+          y: [0, -10, 0],
+          transition: {
+            y: {
+              repeat: Infinity,
+              duration: 1,
+              ease: "easeInOut"
+            }
+          }
+        }
+      : {
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: "spring",
+            stiffness: 260,
+            damping: 20
+          }
+        },
+    exit: { opacity: 0, y: 50 },
+    hover: { scale: 1.1 },
+    tap: { scale: 0.9 }
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
@@ -260,6 +315,32 @@ export function LandingPageComponent() {
           </div>
         )}
       </main>
+
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 bg-purple-600 text-white p-4 rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-200 z-50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50"
+            variants={buttonVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            whileHover="hover"
+            whileTap="tap"
+            aria-label="Back to top"
+          >
+            <motion.svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-6 w-6" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </motion.svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {selectedGif && (
         <div 
