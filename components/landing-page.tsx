@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 
 export function LandingPageComponent() {
@@ -90,50 +89,52 @@ export function LandingPageComponent() {
               />
               <span className="text-xl font-semibold text-purple-600">Expi Analyzer</span>
             </div>
-            <nav className="hidden md:block">
-              <ul className="flex space-x-6">
-                {navItems.map((item) => (
-                  <li key={item.id}>
-                    <button
-                      onClick={() => setActiveSection(item.id)}
-                      className={`text-sm font-medium ${
-                        activeSection === item.id
-                          ? 'text-purple-600'
-                          : 'text-gray-700 hover:text-purple-500'
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            {isMobile && (
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-purple-600 dark:text-purple-400"
-              >
-                <ChevronDownIcon className={`w-6 h-6 transition-transform ${isMenuOpen ? 'rotate-180' : ''}`} />
-              </button>
-            )}
           </div>
+          <nav className="hidden md:flex items-center space-x-4">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveSection(item.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                  activeSection === item.id
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-purple-100 text-purple-600 hover:bg-purple-200'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          {isMobile && (
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-purple-600 dark:text-purple-400 p-2"
+              aria-label="Toggle menu"
+            >
+              <div className="w-6 h-5 flex flex-col justify-between">
+                <span className={`w-full h-0.5 bg-current transform transition-transform duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+                <span className={`w-full h-0.5 bg-current transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                <span className={`w-full h-0.5 bg-current transform transition-transform duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+              </div>
+            </button>
+          )}
         </div>
       </header>
 
       {isMobile && isMenuOpen && (
-        <div className="bg-white shadow-md">
-          <ul className="container mx-auto px-6 py-2">
+        <div className="fixed inset-x-0 top-16 bg-white dark:bg-gray-800 shadow-md z-20">
+          <ul className="container mx-auto px-6 py-4">
             {navItems.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className="mb-2">
                 <button
                   onClick={() => {
                     setActiveSection(item.id)
                     setIsMenuOpen(false)
                   }}
-                  className={`w-full py-2 text-left ${
+                  className={`w-full py-3 px-4 text-left rounded-md transition-colors duration-200 ${
                     activeSection === item.id
-                      ? 'text-purple-600'
-                      : 'text-gray-500 hover:text-purple-500'
+                      ? 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-800'
                   }`}
                 >
                   {item.label}
