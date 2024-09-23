@@ -14,10 +14,6 @@ import {
   BoltIcon,
   RocketLaunchIcon
 } from '@heroicons/react/24/outline'
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function LandingPageComponent() {
   const [selectedGif, setSelectedGif] = useState<string | null>(null)
