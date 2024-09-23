@@ -14,6 +14,10 @@ import {
   BoltIcon,
   RocketLaunchIcon
 } from '@heroicons/react/24/outline'
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function LandingPageComponent() {
   const [selectedGif, setSelectedGif] = useState<string | null>(null)
@@ -160,6 +164,8 @@ export function LandingPageComponent() {
     tap: { scale: 0.9 }
   }
 
+  
+
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
       <header className="bg-transparent absolute w-full z-10">
@@ -242,114 +248,109 @@ export function LandingPageComponent() {
       )}
 
       <main className="flex-grow container mx-auto px-4 sm:px-6 py-8 sm:py-16 pt-32">
-        {activeSection === 'home' && (
-          <div className="mt-16">
-      
-            <div className="text-center mb-16">
-              <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-purple-600">Bem Vindo ao Expi Analyzer</h2>
-              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">A solução completa para automatizar a coleta, análise e visualização de feedbacks com Inteligência Artificial.</p>
-            </div>
+      {activeSection === 'home' && (
+  <div className="mt-12">
+  
+    <div className="text-center mb-12">
+      <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-purple-600">Bem Vindo ao Expi Analyzer</h2>
+      <p className="text-md sm:text-lg text-gray-700 dark:text-gray-300">
+        A solução completa para automatizar a coleta, análise e visualização de feedbacks com Inteligência Artificial.
+      </p>
+    </div>
 
-      
-            <section className="mb-16">
-              <h3 className="text-3xl font-semibold mb-6 text-purple-600 text-center">Sobre o Expi</h3>
-              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 text-center max-w-2xl mx-auto">
-                O Expi é uma plataforma que automatiza a coleta, análise e visualização de feedbacks com IA, ajudando empresas a entender e melhorar a satisfação dos clientes de forma eficiente e escalável.
-              </p>
-            </section>
 
-            <section className="mb-16">
-              <h3 className="text-3xl font-semibold mb-6 text-purple-600 text-center">Funcionalidades</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-         
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <Squares2X2Icon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Coleta Automatizada de Feedbacks</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    Utiliza IA para captar feedbacks via interações automáticas e canais de voz.
-                  </p>
-                </div>
-            
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <ChartBarIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Análise Avançada com IA</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    Avalia sentimentos e classifica feedbacks de forma inteligente.
-                  </p>
-                </div>
-             
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <ChatBubbleBottomCenterTextIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Dashboard de Análise</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    Exibe ratings, gráficos e relatórios claros para gerar insights e melhorar estratégias.
-                  </p>
-                </div>
-          
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <Cog6ToothIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Integração Fácil</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    Conecte-se facilmente com suas ferramentas existentes.
-                  </p>
-                </div>
-             
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <ClipboardIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Monitoramento Contínuo</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    Acompanha a satisfação do cliente, facilitando melhorias constantes.
-                  </p>
-                </div>
-          
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <BoltIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Resposta Mais Rápida</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    A empresa consegue reagir imediatamente aos problemas identificados, aumentando a eficiência no atendimento ao cliente.
-                  </p>
-                </div>
-              </div>
-            </section>
+    <section className="mb-12">
+      <h3 className="text-2xl font-semibold mb-4 text-purple-600 text-center">Sobre o Expi</h3>
+      <p className="text-md sm:text-lg text-gray-700 dark:text-gray-300 text-center max-w-xl mx-auto">
+        O Expi é uma plataforma que automatiza a coleta, análise e visualização de feedbacks com IA, ajudando empresas a entender e melhorar a satisfação dos clientes de forma eficiente e escalável.
+      </p>
+    </section>
 
-        
-            <section className="mb-16">
-              <h3 className="text-3xl font-semibold mb-6 text-purple-600 text-center">Benefícios</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-         
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <RocketLaunchIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Eficiência Operacional</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    Elimina a necessidade de intervenção humana, reduzindo custos e tempo.
-                  </p>
-                </div>
-             
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <ChartBarIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Decisões Estratégicas Baseadas em Dados</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    Oferece insights precisos para aprimorar produtos e serviços.
-                  </p>
-                </div>
-               
-                <div className="flex flex-col items-center bg-purple-100 dark:bg-purple-800 p-6 rounded-lg shadow-md">
-                  <Cog6ToothIcon className="w-12 h-12 text-purple-600 mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Integração com Outras Ferramentas</h4>
-                  <p className="text-center text-gray-700 dark:text-gray-300">
-                    A automação pode ser integrada a sistemas de CRM e ERP, centralizando informações e facilitando a gestão.
-                  </p>
-                </div>
-              </div>
-            </section>
 
-      
-            <section className="text-center">
-              <h3 className="text-3xl font-semibold mb-6 text-purple-600">Pronto para Transformar sua Gestão de Feedbacks?</h3>
-           
-            </section>
-          </div>
-        )}
+    <section className="mb-12">
+      <h3 className="text-2xl font-semibold mb-4 text-purple-600 text-center">Funcionalidades</h3>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <Squares2X2Icon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Coleta Automatizada de Feedbacks</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            Utiliza IA para captar feedbacks via interações automáticas e canais de voz.
+          </p>
+        </div>
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <ChartBarIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Análise Avançada com IA</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            Avalia sentimentos e classifica feedbacks de forma inteligente.
+          </p>
+        </div>
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <ChatBubbleBottomCenterTextIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Dashboard de Análise</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            Exibe ratings, gráficos e relatórios claros para gerar insights e melhorar estratégias.
+          </p>
+        </div>
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <Cog6ToothIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Integração Fácil</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            Conecte-se facilmente com suas ferramentas existentes.
+          </p>
+        </div>
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <ClipboardIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Monitoramento Contínuo</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            Acompanha a satisfação do cliente, facilitando melhorias constantes.
+          </p>
+        </div>
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <BoltIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Resposta Mais Rápida</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            A empresa consegue reagir imediatamente aos problemas identificados, aumentando a eficiência no atendimento ao cliente.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  
+    <section className="mb-12">
+      <h3 className="text-2xl font-semibold mb-4 text-purple-600 text-center">Benefícios</h3>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <RocketLaunchIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Eficiência Operacional</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            Elimina a necessidade de intervenção humana, reduzindo custos e tempo.
+          </p>
+        </div>
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <ChartBarIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Decisões Estratégicas Baseadas em Dados</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            Oferece insights precisos para aprimorar produtos e serviços.
+          </p>
+        </div>
+        <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 dark:shadow-lg dark:shadow-gray-700 p-4 rounded-lg shadow-sm">
+          <Cog6ToothIcon className="w-8 h-8 text-purple-600 mb-2" />
+          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-1">Integração com Outras Ferramentas</h4>
+          <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
+            A automação pode ser integrada a sistemas de CRM e ERP, centralizando informações e facilitando a gestão.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  
+    <section className="text-center">
+      <h3 className="text-2xl font-semibold mb-4 text-purple-600">Pronto para Transformar sua Gestão de Feedbacks?</h3>
+    </section>
+  </div>
+)}
+
+
 
         {activeSection === 'chat' && (
           <div>
