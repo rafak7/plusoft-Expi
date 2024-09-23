@@ -16,7 +16,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 export function LandingPageComponent() {
-  const [selectedGif, setSelectedGif] = useState<string | null>(null)
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [activeSection, setActiveSection] = useState('home') 
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -27,22 +27,22 @@ export function LandingPageComponent() {
     { 
       title: 'Inserindo Nome de Usuário', 
       description: 'Nesta etapa inicial, você insere seu nome para personalizar sua experiência e receber feedback individualizado ao longo da análise.', 
-      gif: '/gif1.gif' 
+      video: '/video1.mp4' 
     },
     { 
       title: 'Criando Chamado', 
       description: 'Nesta etapa, você cria um novo chamado, fornecendo detalhes sobre o problema ou solicitação que precisa de atenção.', 
-      gif: '/gif2.gif' 
+      video: '/video2.mp4' 
     },
     { 
       title: 'Envio de Feedback', 
       description: 'Na etapa final, você tem a oportunidade de enviar seu feedback sobre o atendimento, ajudando-nos a melhorar continuamente nossos serviços.', 
-      gif: '/gif4.gif' 
+      video: '/video3.mp4' 
     },
     { 
       title: 'Armazenamento de Chamados', 
       description: 'Nesta etapa, todos os chamados e feedbacks são armazenados em um dashboard centralizado, permitindo fácil acesso e análise para melhorias contínuas no atendimento.', 
-      gif: '/gif5.gif' 
+      video: '/video4.mp4' 
     },
   ]
 
@@ -50,22 +50,22 @@ export function LandingPageComponent() {
     { 
       title: 'Análise de Tom e Emoção', 
       description: 'O Expi Voice analisa o tom e a emoção na voz do cliente, fornecendo insights valiosos sobre o estado emocional durante a interação.', 
-      gif: '/voice-gif1.gif' 
+      video: '/voice-video1.mp4' 
     },
     { 
       title: 'Transcrição Automática', 
       description: 'Todas as chamadas são transcritas automaticamente, permitindo uma análise textual detalhada das conversas.', 
-      gif: '/voice-gif2.gif' 
+      video: '/voice-video2.mp4' 
     },
     { 
       title: 'Detecção de Palavras-chave', 
       description: 'O sistema identifica palavras-chave importantes durante a chamada, ajudando a categorizar e priorizar as interações.', 
-      gif: '/voice-gif3.gif' 
+      video: '/voice-video3.mp4' 
     },
     { 
       title: 'Relatórios Detalhados', 
       description: 'Gere relatórios detalhados com métricas importantes e insights acionáveis para melhorar o atendimento ao cliente.', 
-      gif: '/voice-gif4.gif' 
+      video: '/voice-video4.mp4' 
     },
   ]
 
@@ -73,22 +73,22 @@ export function LandingPageComponent() {
     { 
       title: 'Análise Instantânea', 
       description: 'O Expi Express oferece análises em tempo real, permitindo respostas rápidas e eficientes às necessidades do cliente.', 
-      gif: '/express-gif1.gif' 
+      video: '/express-video1.mp4' 
     },
     { 
       title: 'Integração Fácil', 
       description: 'Conecte o Expi Express facilmente com suas ferramentas existentes, garantindo um fluxo de trabalho suave e eficiente.', 
-      gif: '/express-gif2.gif' 
+      video: '/express-video2.mp4' 
     },
     { 
       title: 'Personalização Avançada', 
       description: 'Adapte as análises e relatórios às necessidades específicas do seu negócio, garantindo insights relevantes e acionáveis.', 
-      gif: '/express-gif3.gif' 
+      video: '/express-video3.mp4' 
     },
     { 
       title: 'Suporte 24/7', 
       description: 'Nossa equipe de suporte está sempre disponível para ajudar, garantindo que você aproveite ao máximo o Expi Express.', 
-      gif: '/express-gif4.gif' 
+      video: '/express-video4.mp4' 
     },
   ]
 
@@ -96,26 +96,26 @@ export function LandingPageComponent() {
     { 
       title: 'Visão Geral do Dashboard', 
       description: 'Explore o menu principal do dashboard e a funcionalidade de usuários. Visualize métricas essenciais e gerencie contas de usuário em uma interface intuitiva, proporcionando uma visão abrangente e acionável do desempenho do seu negócio.',
-      gif: '/gif1-dashboard.gif' 
+      video: '/video1-dashboard.mp4' 
     },
     { 
       title: 'Análise de Feedbacks', 
       description: 'Explore a página de feedbacks do dashboard gerados pelo Expi Chat, visualizando análises de sentimentos e insights valiosos em gráficos intuitivos.',
-      gif: '/gif2-dashboard.gif' 
+      video: '/video2-dashboard.mp4' 
     },
     { 
       title: 'Análise de Feedbacks URA', 
       description: 'Visualize os feedbacks gerados pelo Expi Voice, oferecendo insights detalhados sobre as interações de voz com os clientes.',
-      gif: '/gif3-dashboard.gif' 
+      video: '/video3-dashboard.mp4' 
     },
     { 
       title: 'Clientes', 
       description: 'Visualize e gerencie a lista de clientes que utilizam o Expi, permitindo um acompanhamento detalhado de cada conta.',
-      gif: '/gif4-dashboard.gif' 
+      video: '/video4-dashboard.mp4' 
     },
   ]
 
-  const gifRefs = useRef<(HTMLImageElement | null)[]>([])
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
 
   useEffect(() => {
     const handleResize = () => {
@@ -138,24 +138,25 @@ export function LandingPageComponent() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              const img = entry.target as HTMLImageElement
-              img.src = img.dataset.src || ''
+              const video = entry.target as HTMLVideoElement
+              video.play()
             } else {
-              const img = entry.target as HTMLImageElement
-              img.src = ''
+              const video = entry.target as HTMLVideoElement
+              video.pause()
+              video.currentTime = 0
             }
           })
         },
         { threshold: 0.5 }
       )
 
-      gifRefs.current.forEach((gif) => {
-        if (gif) observer.observe(gif)
+      videoRefs.current.forEach((video) => {
+        if (video) observer.observe(video)
       })
 
       return () => {
-        gifRefs.current.forEach((gif) => {
-          if (gif) observer.unobserve(gif)
+        videoRefs.current.forEach((video) => {
+          if (video) observer.unobserve(video)
         })
       }
     }
@@ -435,18 +436,17 @@ export function LandingPageComponent() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                     className="w-full flex justify-center cursor-pointer"
-                    onClick={() => setSelectedGif(section.gif)}
+                    onClick={() => setSelectedVideo(section.video)}
                   >
-                    <Image
-                      ref={(el: HTMLImageElement | null) => {
-                        if (el) gifRefs.current[index] = el;
+                    <video
+                      ref={(el: HTMLVideoElement | null) => {
+                        if (el) videoRefs.current[index] = el;
                       }}
-                      data-src={section.gif}
-                      src={section.gif}
-                      alt={section.title}
-                      width={500}
-                      height={300}
-                      unoptimized
+                      src={section.video}
+                      loop
+                      muted
+                      playsInline
+                      className="w-full max-w-2xl rounded-lg shadow-lg"
                     />
                   </motion.div>
                   <motion.div 
@@ -481,18 +481,17 @@ export function LandingPageComponent() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                     className="w-full flex justify-center cursor-pointer"
-                    onClick={() => setSelectedGif(section.gif)}
+                    onClick={() => setSelectedVideo(section.video)}
                   >
-                    <Image
-                      ref={(el: HTMLImageElement | null) => {
-                        if (el) gifRefs.current[index] = el;
+                    <video
+                      ref={(el: HTMLVideoElement | null) => {
+                        if (el) videoRefs.current[index] = el;
                       }}
-                      data-src={section.gif}
-                      src={section.gif}
-                      alt={section.title}
-                      width={500}
-                      height={300}
-                      unoptimized
+                      src={section.video}
+                      loop
+                      muted
+                      playsInline
+                      className="w-full max-w-2xl rounded-lg shadow-lg"
                     />
                   </motion.div>
                   <motion.div 
@@ -527,18 +526,17 @@ export function LandingPageComponent() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                     className="w-full flex justify-center cursor-pointer"
-                    onClick={() => setSelectedGif(section.gif)}
+                    onClick={() => setSelectedVideo(section.video)}
                   >
-                    <Image
-                      ref={(el: HTMLImageElement | null) => {
-                        if (el) gifRefs.current[index] = el;
+                    <video
+                      ref={(el: HTMLVideoElement | null) => {
+                        if (el) videoRefs.current[index] = el;
                       }}
-                      data-src={section.gif}
-                      src={section.gif}
-                      alt={section.title}
-                      width={500}
-                      height={300}
-                      unoptimized
+                      src={section.video}
+                      loop
+                      muted
+                      playsInline
+                      className="w-full max-w-2xl rounded-lg shadow-lg"
                     />
                   </motion.div>
                   <motion.div 
@@ -573,18 +571,17 @@ export function LandingPageComponent() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                     className="w-full flex justify-center cursor-pointer"
-                    onClick={() => setSelectedGif(section.gif)}
+                    onClick={() => setSelectedVideo(section.video)}
                   >
-                    <Image
-                      ref={(el: HTMLImageElement | null) => {
-                        if (el) gifRefs.current[index] = el;
+                    <video
+                      ref={(el: HTMLVideoElement | null) => {
+                        if (el) videoRefs.current[index] = el;
                       }}
-                      data-src={section.gif}
-                      src={section.gif}
-                      alt={section.title}
-                      width={500}
-                      height={300}
-                      unoptimized
+                      src={section.video}
+                      loop
+                      muted
+                      playsInline
+                      className="w-full max-w-2xl rounded-lg shadow-lg"
                     />
                   </motion.div>
                   <motion.div 
@@ -628,15 +625,17 @@ export function LandingPageComponent() {
         )}
       </AnimatePresence>
 
-      {selectedGif && (
+      {selectedVideo && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm flex items-center justify-center z-50"
-          onClick={() => setSelectedGif(null)}
+          onClick={() => setSelectedVideo(null)}
         >
           <div className="max-w-4xl max-h-[90vh] overflow-auto bg-black bg-opacity-50 p-1 rounded-lg">
-            <img
-              src={selectedGif}
-              alt="GIF em tamanho grande"
+            <video
+              src={selectedVideo}
+              autoPlay
+              loop
+              controls
               className="w-full h-auto rounded-md"
             />
           </div>
