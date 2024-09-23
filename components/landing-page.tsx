@@ -46,6 +46,75 @@ export function LandingPageComponent() {
     },
   ]
 
+  const voiceSections = [
+    { 
+      title: 'Análise de Tom e Emoção', 
+      description: 'O Expi Voice analisa o tom e a emoção na voz do cliente, fornecendo insights valiosos sobre o estado emocional durante a interação.', 
+      gif: '/voice-gif1.gif' 
+    },
+    { 
+      title: 'Transcrição Automática', 
+      description: 'Todas as chamadas são transcritas automaticamente, permitindo uma análise textual detalhada das conversas.', 
+      gif: '/voice-gif2.gif' 
+    },
+    { 
+      title: 'Detecção de Palavras-chave', 
+      description: 'O sistema identifica palavras-chave importantes durante a chamada, ajudando a categorizar e priorizar as interações.', 
+      gif: '/voice-gif3.gif' 
+    },
+    { 
+      title: 'Relatórios Detalhados', 
+      description: 'Gere relatórios detalhados com métricas importantes e insights acionáveis para melhorar o atendimento ao cliente.', 
+      gif: '/voice-gif4.gif' 
+    },
+  ]
+
+  const expressSections = [
+    { 
+      title: 'Análise Instantânea', 
+      description: 'O Expi Express oferece análises em tempo real, permitindo respostas rápidas e eficientes às necessidades do cliente.', 
+      gif: '/express-gif1.gif' 
+    },
+    { 
+      title: 'Integração Fácil', 
+      description: 'Conecte o Expi Express facilmente com suas ferramentas existentes, garantindo um fluxo de trabalho suave e eficiente.', 
+      gif: '/express-gif2.gif' 
+    },
+    { 
+      title: 'Personalização Avançada', 
+      description: 'Adapte as análises e relatórios às necessidades específicas do seu negócio, garantindo insights relevantes e acionáveis.', 
+      gif: '/express-gif3.gif' 
+    },
+    { 
+      title: 'Suporte 24/7', 
+      description: 'Nossa equipe de suporte está sempre disponível para ajudar, garantindo que você aproveite ao máximo o Expi Express.', 
+      gif: '/express-gif4.gif' 
+    },
+  ]
+
+  const dashboardSections = [
+    { 
+      title: 'Visão Geral do Dashboard', 
+      description: 'Explore o menu principal do dashboard e a funcionalidade de usuários. Visualize métricas essenciais e gerencie contas de usuário em uma interface intuitiva, proporcionando uma visão abrangente e acionável do desempenho do seu negócio.',
+      gif: '/gif1-dashboard.gif' 
+    },
+    { 
+      title: 'Análise de Feedbacks', 
+      description: 'Explore a página de feedbacks do dashboard gerados pelo Expi Chat, visualizando análises de sentimentos e insights valiosos em gráficos intuitivos.',
+      gif: '/gif2-dashboard.gif' 
+    },
+    { 
+      title: 'Análise de Feedbacks URA', 
+      description: 'Visualize os feedbacks gerados pelo Expi Voice, oferecendo insights detalhados sobre as interações de voz com os clientes.',
+      gif: '/gif3-dashboard.gif' 
+    },
+    { 
+      title: 'Clientes', 
+      description: 'Visualize e gerencie a lista de clientes que utilizam o Expi, permitindo um acompanhamento detalhado de cada conta.',
+      gif: '/gif4-dashboard.gif' 
+    },
+  ]
+
   const gifRefs = useRef<(HTMLImageElement | null)[]>([])
 
   useEffect(() => {
@@ -393,50 +462,142 @@ export function LandingPageComponent() {
             ))}
           </div>
         )}
+
         {activeSection === 'voice' && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Voice</h2>
-            <p className="text-lg text-center mb-8">Descubra o poder da análise de voz com Expi Voice.</p>
-            <div className="bg-purple-100 p-8 rounded-lg shadow-md">
-              <h3 className="text-2xl font-semibold mb-4">Recursos do Expi Voice</h3>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>Análise de tom e emoção na voz</li>
-                <li>Transcrição automática de áudio</li>
-                <li>Detecção de palavras-chave</li>
-                <li>Relatórios detalhados de análise vocal</li>
-              </ul>
-            </div>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Voice</h2>
+            {voiceSections.map((section, index) => (
+              <motion.section 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="mb-12 sm:mb-24 py-8 sm:py-16"
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-purple-600 text-center">{section.title}</h2>
+                <div className="flex flex-col items-center gap-6 sm:gap-8">
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full flex justify-center cursor-pointer"
+                    onClick={() => setSelectedGif(section.gif)}
+                  >
+                    <Image
+                      ref={(el: HTMLImageElement | null) => {
+                        if (el) gifRefs.current[index] = el;
+                      }}
+                      data-src={section.gif}
+                      src={section.gif}
+                      alt={section.title}
+                      width={500}
+                      height={300}
+                      unoptimized
+                    />
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="w-full sm:max-w-4xl px-4 sm:px-0"
+                  >
+                    <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 text-center">{section.description}</p>
+                  </motion.div>
+                </div>
+              </motion.section>
+            ))}
           </div>
         )}
+
         {activeSection === 'express' && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Express</h2>
-            <p className="text-lg text-center mb-8">Análise rápida e eficiente com Expi Express.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-purple-100 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3">Análise Instantânea</h3>
-                <p>Obtenha resultados em segundos com nossa tecnologia de ponta.</p>
-              </div>
-              <div className="bg-purple-100 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3">Integração Fácil</h3>
-                <p>Conecte-se facilmente com suas ferramentas existentes.</p>
-              </div>
-              <div className="bg-purple-100 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3">Personalização Avançada</h3>
-                <p>Adapte a análise às necessidades específicas do seu negócio.</p>
-              </div>
-              <div className="bg-purple-100 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3">Suporte 24/7</h3>
-                <p>Nossa equipe está sempre disponível para ajudar.</p>
-              </div>
-            </div>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Express</h2>
+            {expressSections.map((section, index) => (
+              <motion.section 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="mb-12 sm:mb-24 py-8 sm:py-16"
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-purple-600 text-center">{section.title}</h2>
+                <div className="flex flex-col items-center gap-6 sm:gap-8">
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full flex justify-center cursor-pointer"
+                    onClick={() => setSelectedGif(section.gif)}
+                  >
+                    <Image
+                      ref={(el: HTMLImageElement | null) => {
+                        if (el) gifRefs.current[index] = el;
+                      }}
+                      data-src={section.gif}
+                      src={section.gif}
+                      alt={section.title}
+                      width={500}
+                      height={300}
+                      unoptimized
+                    />
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="w-full sm:max-w-4xl px-4 sm:px-0"
+                  >
+                    <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 text-center">{section.description}</p>
+                  </motion.div>
+                </div>
+              </motion.section>
+            ))}
           </div>
         )}
+
         {activeSection === 'dashboard' && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Dashboard</h2>
-            <p className="text-lg text-center mb-8">Gerencie e visualize todos os seus dados em um único lugar.</p>
-           
+            <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Dashboard</h2>
+            {dashboardSections.map((section, index) => (
+              <motion.section 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="mb-12 sm:mb-24 py-8 sm:py-16"
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-purple-600 text-center">{section.title}</h2>
+                <div className="flex flex-col items-center gap-6 sm:gap-8">
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full flex justify-center cursor-pointer"
+                    onClick={() => setSelectedGif(section.gif)}
+                  >
+                    <Image
+                      ref={(el: HTMLImageElement | null) => {
+                        if (el) gifRefs.current[index] = el;
+                      }}
+                      data-src={section.gif}
+                      src={section.gif}
+                      alt={section.title}
+                      width={500}
+                      height={300}
+                      unoptimized
+                    />
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="w-full sm:max-w-4xl px-4 sm:px-0"
+                  >
+                    <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 text-center">{section.description}</p>
+                  </motion.div>
+                </div>
+              </motion.section>
+            ))}
           </div>
         )}
       </main>
