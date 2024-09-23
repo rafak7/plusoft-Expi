@@ -27,22 +27,22 @@ export function LandingPageComponent() {
     { 
       title: 'Inserindo Nome de Usuário', 
       description: 'Nesta etapa inicial, você insere seu nome para personalizar sua experiência e receber feedback individualizado ao longo da análise.', 
-      video: '/video1.mp4' 
+      video: '/video1-1.mp4' 
     },
     { 
       title: 'Criando Chamado', 
       description: 'Nesta etapa, você cria um novo chamado, fornecendo detalhes sobre o problema ou solicitação que precisa de atenção.', 
-      video: '/video2.mp4' 
+      video: '/video2-2.mp4' 
     },
     { 
       title: 'Envio de Feedback', 
       description: 'Na etapa final, você tem a oportunidade de enviar seu feedback sobre o atendimento, ajudando-nos a melhorar continuamente nossos serviços.', 
-      video: '/video3.mp4' 
+      video: '/video3-3.mp4' 
     },
     { 
       title: 'Armazenamento de Chamados', 
       description: 'Nesta etapa, todos os chamados e feedbacks são armazenados em um dashboard centralizado, permitindo fácil acesso e análise para melhorias contínuas no atendimento.', 
-      video: '/video4.mp4' 
+      video: '/video4-4.mp4' 
     },
   ]
 
@@ -635,6 +635,7 @@ export function LandingPageComponent() {
               src={selectedVideo}
               autoPlay
               loop
+              muted
               controls
               className="w-full h-auto rounded-md"
             />
