@@ -46,6 +46,29 @@ export function LandingPageComponent() {
     },
   ]
 
+  const dashboardSections = [
+    { 
+      title: 'Visão Geral do Dashboard', 
+      description: 'Explore o menu principal do dashboard e a funcionalidade de usuários. Visualize métricas essenciais e gerencie contas de usuário em uma interface intuitiva, proporcionando uma visão abrangente e acionável do desempenho do seu negócio.',
+      gif: '/gif1-dashboard.gif' 
+    },
+    { 
+      title: 'Análise de Feedbacks', 
+      description: 'Explore a página de feedbacks do dashboard gerados pelo Expi Chat, visualizando análises de sentimentos e insights valiosos em gráficos intuitivos.',
+      gif: '/gif2-dashboard.gif' 
+    },
+    { 
+      title: 'Análise de Feedbacks URA', 
+      description: 'Visualize os feedbacks gerados pelo Expi Voice, oferecendo insights detalhados sobre as interações de voz com os clientes.',
+      gif: '/gif3-dashboard.gif' 
+    },
+    { 
+      title: 'Clientes', 
+      description: 'Visualize e gerencie a lista de clientes que utilizam o Expi, permitindo um acompanhamento detalhado de cada conta.',
+      gif: '/gif4-dashboard.gif' 
+    },
+  ]
+
   const gifRefs = useRef<(HTMLImageElement | null)[]>([])
 
   useEffect(() => {
@@ -437,9 +460,47 @@ export function LandingPageComponent() {
         )}
         {activeSection === 'dashboard' && (
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Dashboard</h2>
-            <p className="text-lg text-center mb-8">Gerencie e visualize todos os seus dados em um único lugar.</p>
-           
+            <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-purple-600 text-center mt-16">Expi Dashboard</h2>
+            {dashboardSections.map((section, index) => (
+              <motion.section 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="mb-12 sm:mb-24 py-8 sm:py-16"
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-purple-600 text-center">{section.title}</h2>
+                <div className="flex flex-col items-center gap-6 sm:gap-8">
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full flex justify-center cursor-pointer"
+                    onClick={() => setSelectedGif(section.gif)}
+                  >
+                    <Image
+                      ref={(el: HTMLImageElement | null) => {
+                        if (el) gifRefs.current[index] = el;
+                      }}
+                      data-src={section.gif}
+                      src={section.gif}
+                      alt={section.title}
+                      width={500}
+                      height={300}
+                      unoptimized
+                    />
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="w-full sm:max-w-4xl px-4 sm:px-0"
+                  >
+                    <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 text-center">{section.description}</p>
+                  </motion.div>
+                </div>
+              </motion.section>
+            ))}
           </div>
         )}
       </main>
