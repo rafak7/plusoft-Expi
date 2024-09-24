@@ -405,7 +405,10 @@ export function LandingPageComponent() {
         className="mt-4 px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-full shadow-lg hover:from-purple-700 hover:to-purple-900 transition duration-300 transform hover:scale-110"
         onClick={() => {
           setActiveSection('chat');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          // Adicionando um pequeno atraso antes de rolar para o topo
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 100);
         }}
         animate={{ y: [0, -20, 0] }}
         transition={{ repeat: Infinity, duration: 0.8 }}
