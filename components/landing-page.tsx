@@ -48,48 +48,34 @@ export function LandingPageComponent() {
 
   const voiceSections = [
     { 
-      title: 'Análise de Tom e Emoção', 
-      description: 'O Expi Voice analisa o tom e a emoção na voz do cliente, fornecendo insights valiosos sobre o estado emocional durante a interação.', 
-      video: '/voice-video1.mp4' 
+      title: 'Funcionalidades do Expi Voice', 
+      description: 'Este vídeo demonstra como acessar o canal de voz e a entrada simultânea do atendente de suporte, proporcionando uma experiência de atendimento integrada e eficiente.', 
+      video: '/voice1.mp4' 
     },
     { 
-      title: 'Transcrição Automática', 
-      description: 'Todas as chamadas são transcritas automaticamente, permitindo uma análise textual detalhada das conversas.', 
-      video: '/voice-video2.mp4' 
+      title: 'Transcrição Automática da Chamada', 
+      description: 'Neste vídeo, as conversas são iniciadas gerando a transcrição automaticamente, permitindo que o atendimento seja analisado detalhadamente.', 
+      video: '/voice2.mp4' 
     },
     { 
-      title: 'Detecção de Palavras-chave', 
-      description: 'O sistema identifica palavras-chave importantes durante a chamada, ajudando a categorizar e priorizar as interações.', 
-      video: '/voice-video3.mp4' 
-    },
-    { 
-      title: 'Relatórios Detalhados', 
-      description: 'Gere relatórios detalhados com métricas importantes e insights acionáveis para melhorar o atendimento ao cliente.', 
-      video: '/voice-video4.mp4' 
-    },
+      title: 'Analise de Feedbacks no Dashboard', 
+      description: 'Neste vídeo, o chamado é transcrito automaticamente e analisado, retornando um feedback detalhado no dashboard, ajudando a categorizar e priorizar as interações.', 
+      video: '/voice3.mp4' 
+    }
+
   ]
 
   const expressSections = [
     { 
-      title: 'Análise Instantânea', 
+      title: 'Funcionalidades do Expi Express', 
       description: 'O Expi Express oferece análises em tempo real, permitindo respostas rápidas e eficientes às necessidades do cliente.', 
-      video: '/express-video1.mp4' 
+      video: '/express1.mp4' 
     },
     { 
-      title: 'Integração Fácil', 
-      description: 'Conecte o Expi Express facilmente com suas ferramentas existentes, garantindo um fluxo de trabalho suave e eficiente.', 
-      video: '/express-video2.mp4' 
-    },
-    { 
-      title: 'Personalização Avançada', 
-      description: 'Adapte as análises e relatórios às necessidades específicas do seu negócio, garantindo insights relevantes e acionáveis.', 
-      video: '/express-video3.mp4' 
-    },
-    { 
-      title: 'Suporte 24/7', 
-      description: 'Nossa equipe de suporte está sempre disponível para ajudar, garantindo que você aproveite ao máximo o Expi Express.', 
-      video: '/express-video4.mp4' 
-    },
+      title: 'Suporte ao Cliente', 
+      description: 'Neste vídeo, ocorre uma solicitação do cliente e o Expi Express responde com eficiência e rapidez, garantindo um fluxo de trabalho suave e integrado com suas ferramentas existentes.', 
+      video: '/express2.mp4' 
+    }
   ]
 
   const dashboardSections = [
@@ -455,7 +441,7 @@ export function LandingPageComponent() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="w-full sm:max-w-4xl px-4 sm:px-0"
                   >
-                    <p className="text-lg sm:text-xl text-gray-700 text-center">{section.description}</p>
+                    <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 text-center">{section.description}</p>
                   </motion.div>
                 </div>
               </motion.section>
