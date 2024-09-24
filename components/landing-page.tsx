@@ -96,22 +96,22 @@ export function LandingPageComponent() {
     { 
       title: 'Visão Geral do Dashboard', 
       description: 'Explore o menu principal do dashboard e a funcionalidade de usuários. Visualize métricas essenciais e gerencie contas de usuário em uma interface intuitiva, proporcionando uma visão abrangente e acionável do desempenho do seu negócio.',
-      video: '/video1-dashboard.mp4' 
+      video: '/dashboard1.mp4' 
     },
     { 
       title: 'Análise de Feedbacks', 
       description: 'Explore a página de feedbacks do dashboard gerados pelo Expi Chat, visualizando análises de sentimentos e insights valiosos em gráficos intuitivos.',
-      video: '/video2-dashboard.mp4' 
+      video: '/dashboard2.mp4' 
     },
     { 
       title: 'Análise de Feedbacks URA', 
       description: 'Visualize os feedbacks gerados pelo Expi Voice, oferecendo insights detalhados sobre as interações de voz com os clientes.',
-      video: '/video3-dashboard.mp4' 
+      video: '/dashboard3.mp4' 
     },
     { 
       title: 'Clientes', 
       description: 'Visualize e gerencie a lista de clientes que utilizam o Expi, permitindo um acompanhamento detalhado de cada conta.',
-      video: '/video4-dashboard.mp4' 
+      video: '/dashboard4.mp4' 
     },
   ]
 
