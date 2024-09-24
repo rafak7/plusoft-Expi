@@ -284,6 +284,7 @@ export function LandingPageComponent() {
                   onClick={() => {
                     setActiveSection(item.id)
                     setIsMenuOpen(false)
+                    window.scrollTo({ top: 0, behavior: 'smooth' }) // Adicionado para rolar para o topo
                   }}
                   className={`w-full py-3 px-4 text-left rounded-md transition-colors duration-200 ${
                     activeSection === item.id
