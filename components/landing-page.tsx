@@ -312,10 +312,12 @@ export function LandingPageComponent() {
 
 
     <section className="mb-12">
-      <h3 className="text-2xl font-semibold mb-4 text-purple-600 text-center">Sobre o Expi</h3>
-      <p className="text-md sm:text-lg text-gray-700 dark:text-gray-300 text-center max-w-xl mx-auto">
-        O Expi é uma plataforma que automatiza a coleta, análise e visualização de feedbacks com IA, ajudando empresas a entender e melhorar a satisfação dos clientes de forma eficiente e escalável.
-      </p>
+      <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md shadow-lg shadow-gray-700">
+        <h3 className="text-3xl sm:text-4xl font-bold mb-6 text-purple-700 text-center">Sobre o Expi</h3>
+        <p className="text-lg sm:text-xl text-gray-800 dark:text-gray-200 text-center max-w-2xl mx-auto leading-relaxed">
+          O Expi é uma plataforma inovadora que automatiza a coleta, análise e visualização de feedbacks utilizando Inteligência Artificial. Nossa solução ajuda empresas a entender e melhorar a satisfação dos clientes de forma eficiente e escalável, proporcionando insights valiosos e ações estratégicas.
+        </p>
+      </div>
     </section>
 
 
@@ -398,6 +400,17 @@ export function LandingPageComponent() {
   
     <section className="text-center">
       <h3 className="text-2xl font-semibold mb-4 text-purple-600">Pronto para Transformar sua Gestão de Feedbacks?</h3>
+      <motion.button 
+        className="mt-4 px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-full shadow-lg hover:from-purple-700 hover:to-purple-900 transition duration-300 transform hover:scale-110"
+        onClick={() => {
+          setActiveSection('chat');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        animate={{ y: [0, -20, 0] }}
+        transition={{ repeat: Infinity, duration: 0.8 }}
+      >
+        Começar
+      </motion.button>
     </section>
   </div>
 )}

@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "ExpirenceIA",
+  title: "Expi Analyzer",
   description: "Desenvolido por Equipe ExperienceIA",
   icons: {
     icon: "/icon.svg", // Certifique-se de que este arquivo existe na pasta `public`
